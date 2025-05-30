@@ -2,6 +2,15 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Link,
+  Paper,
+  Alert,
+} from "@mui/material";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -28,53 +37,104 @@ function Register() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "2rem auto", textAlign: "center" }}>
-      <h2>Registro</h2>
-      <form onSubmit={handleRegister}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }}
-        />
-        <input
-          type="password"
-          placeholder="Confirmar contraseña"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-          style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }}
-        />
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "0.7rem",
-            backgroundColor: "#28a745",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
+    <Box
+      sx={{
+        backgroundColor: "#F5F5F5",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflow: "hidden",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Paper
+        elevation={3}
+        sx={{
+          p: 4,
+          width: "90%",
+          maxWidth: "400px",
+          borderRadius: 2,
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+        }}
+      >
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            textAlign: "center",
+            mb: 3,
+            color: "#1976d2",
+            fontWeight: "bold",
           }}
         >
-          Registrarse
-        </button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <p>
-        ¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a>
-      </p>
-    </div>
+          Registro
+        </Typography>
+
+        <form onSubmit={handleRegister}>
+          <TextField
+            fullWidth
+            type="email"
+            label="Email"
+            variant="outlined"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            fullWidth
+            type="password"
+            label="Contraseña"
+            variant="outlined"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            fullWidth
+            type="password"
+            label="Confirmar Contraseña"
+            variant="outlined"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            sx={{ mb: 3 }}
+          />
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+
+          <Button
+            fullWidth
+            variant="contained"
+            type="submit"
+            sx={{
+              backgroundColor: "#1976d2",
+              "&:hover": { backgroundColor: "#1565c0" },
+              py: 1.5,
+              mb: 2,
+            }}
+          >
+            Registrarse
+          </Button>
+        </form>
+
+        <Typography variant="body2" sx={{ textAlign: "center" }}>
+          ¿Ya tienes cuenta?{" "}
+          <Link href="/login" sx={{ color: "#1976d2" }}>
+            Inicia sesión aquí
+          </Link>
+        </Typography>
+      </Paper>
+    </Box>
   );
 }
 
