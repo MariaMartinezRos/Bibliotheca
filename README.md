@@ -1,6 +1,9 @@
 # BIBLIOTHECA - React JS
 
-![Bibliotheca Logo](/public/bibliotheca.svg)
+<div align="center">
+  <img src="/public/bibliotheca.svg" alt="Bibliotheca Logo" width="200" />
+</div>
+
 
 Un moderno buscador de libros implementado con **React** que utiliza la API de **Gutendex** y **Firebase** para autenticación.
 
